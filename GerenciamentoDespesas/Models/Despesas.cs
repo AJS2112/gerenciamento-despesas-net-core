@@ -15,6 +15,7 @@ namespace GerenciamentoDespesas.Models
         public Meses Meses { get; set; }
 
         public int TipoDespesaId { get; set; }
+        public TipoDespesas TipoDespesas { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
         [Range(0, double.MaxValue, ErrorMessage = "Valor Inválido")]
