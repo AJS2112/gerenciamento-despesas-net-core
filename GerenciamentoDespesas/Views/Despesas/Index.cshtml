@@ -12,7 +12,7 @@
             <a asp-action="Create" class="btn btn-outline-primary btn-sm">Nova Despesa</a>
         </p>
 
-        @if (TempData["Confirmacao"]!=null)
+        @if (TempData["Confirmacao"] != null)
         {
             <h6 class="alert alert-success">@TempData["Confirmacao"]</h6>
         }
@@ -29,6 +29,10 @@
         <div class="row">
             <div class="col">
                 <partial name="_GastoTotalMes" />
+            </div>
+
+            <div class="col">
+                <partial name="_GastoMes" />
             </div>
         </div>
 
@@ -106,9 +110,14 @@
 
 @section Scripts{
 
+    <script src="~/js/MetodosGerais.js"></script>
+    <script src="~/js/GraficoGastoMes.js"></script>
     <script src="~/js/GraficoTotalMes.js"></script>
-    <script>
 
+
+
+    <script>
+        CarregarDadosGastosMes();
         CarregarDadosGastosTotaisMes();
 
         function ExibirModal(id) {
