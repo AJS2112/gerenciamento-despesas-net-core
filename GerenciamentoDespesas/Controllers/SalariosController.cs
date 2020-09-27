@@ -19,10 +19,22 @@ namespace GerenciamentoDespesas.Controllers
         }
 
         // GET: Salarios
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var contexto = _context.Salarios.Include(s => s.Meses);
             return View(await contexto.ToListAsync());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Index (string txtProcurar)
+        {
+            if (!String.IsNullOrEmpty(txtProcurar))
+            {
+                return View(await _context.Salarios.Include(s => s.Meses).Where(m => m.Meses.Nome.ToUpper().Contains(txtProcurar.ToUpper())).ToListAsync());
+            }
+
+            return View(await _context.Salarios.Include(s => s.Meses).ToListAsync());
         }
 
         
