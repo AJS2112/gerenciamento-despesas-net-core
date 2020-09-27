@@ -40,6 +40,12 @@
             <partial name="_GastosTotais" />
         </div>
 
+        <div class="estatisticas">
+            <div class="alert alert-primary">
+                @await Component.InvokeAsync("Estatisticas"); 
+            </div>
+        </div>
+
         <div class="tabelaPrincipal">
 
             <table class="table table-hover">
