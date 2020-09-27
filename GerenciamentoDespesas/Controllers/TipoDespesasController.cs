@@ -29,11 +29,30 @@ namespace GerenciamentoDespesas.Controllers
         {
             if (!String.IsNullOrEmpty(txtProcurar))
                 return View(await _context.TipoDespesas.Where(td => td.Nome.ToUpper().Contains(txtProcurar.ToUpper())).ToListAsync());
-            
+
             return View(await _context.TipoDespesas.ToListAsync());
         }
 
-        
+
+        public JsonResult AdicionarTipoDespesa(string txtDespesa)
+        {
+            if (!String.IsNullOrEmpty(txtDespesa))
+            {
+                if (!_context.TipoDespesas.Any(td => td.Nome.ToUpper() == txtDespesa.ToUpper()))
+                {
+                    TipoDespesas tipoDespesas = new TipoDespesas();
+                    tipoDespesas.Nome = txtDespesa;
+                    _context.Add(tipoDespesas);
+                    _context.SaveChanges();
+
+                    return Json(true);
+                }
+
+            }
+            return Json(false);
+
+        }
+
         // GET: TipoDespesas/Create
         public IActionResult Create()
         {
@@ -118,10 +137,10 @@ namespace GerenciamentoDespesas.Controllers
             return View(tipoDespesas);
         }
 
-        
+
 
         // POST: TipoDespesas/Delete/5
-        [HttpPost]        
+        [HttpPost]
         public async Task<JsonResult> Delete(int id)
         {
             var tipoDespesas = await _context.TipoDespesas.FindAsync(id);
